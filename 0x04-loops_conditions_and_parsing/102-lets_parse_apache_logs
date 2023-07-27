@@ -1,1 +1,8 @@
 #!/usr/bin/env bash
+# bash script that tell the story abt file etc/password
+
+while IFS=":" read -r username password uid gid info home_dir shell 
+do
+  echo "The user $username is part of the $gid gang, lives in $home_dir and rides $shell."\
+    "$uid's place is protected by the passcode $password, more info about the user here: $info"
+done < /etc/passwd
