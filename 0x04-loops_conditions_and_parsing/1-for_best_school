@@ -1,2 +1,7 @@
+#!/usr/bin/env bash
+# script that print Best school 10 times
 
-echo yes
+for _ in {1..10}
+do
+  echo "Best School"
+done
