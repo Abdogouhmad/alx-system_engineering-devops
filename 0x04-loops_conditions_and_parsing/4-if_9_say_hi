@@ -1,1 +1,13 @@
 #!/usr/bin/env bash
+# print hi if 9 is a number 
+# declare the variable i
+i=0
+while [ $i -le 10 ]
+do 
+  if [ $i -eq 9 ]; then
+    printf "Hi\n"
+  else
+    printf "Best School\n"
+  fi
+  ((i++))
+done 
