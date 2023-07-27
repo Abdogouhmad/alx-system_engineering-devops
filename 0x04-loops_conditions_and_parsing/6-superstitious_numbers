@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # script that displays numbers from 1 to 20
 
 i=1
