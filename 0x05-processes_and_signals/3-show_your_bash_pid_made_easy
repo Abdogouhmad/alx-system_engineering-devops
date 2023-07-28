@@ -1,1 +1,4 @@
 #!/usr/bin/env bash
+# script that display the PID of bash without using ps (pgrep)
+
+pgrep -l bash
