@@ -11,7 +11,7 @@ if [ -z "$command" ]; then
 fi
 # dashbord that manage the PID porcess using condition
 if [ "$command" == "start" ]; then
-    ./manage_my_process &
+    bash ./manage_my_process &
     echo "$!" > $file
     echo "manage_my_process started"
 elif [ "$command" == "stop" ]; then
