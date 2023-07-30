@@ -1,1 +1,22 @@
 #!/usr/bin/env bash
+# bash script that create file at /var/run/myscript.pid 
+# displays To infinity and beyond indefinitely
+# displays I hate the kill command when receiving a SIGTERM signal
+# displays Y U no love me?! when receiving a SIGINT signal
+# deletes the file /var/run/myscript.pid and terminates itself when receiving a SIGQUIT or SIGTERM signal
+
+file="/var/run/myscript.pid"
+# check if the file exists if not create it
+if [ ! -e "$file" ]; then
+  touch "$file"
+fi
+sleep 2 &
+
+echo "$!" > "$file"
+trap "echo 'I hate the kill command'; rm -f /var/run/myscript.pid; exit" SIGTERM
+trap "echo 'Y U no love me?!'" SIGINT
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+done
