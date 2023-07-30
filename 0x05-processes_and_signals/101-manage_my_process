@@ -7,7 +7,7 @@ command="$1"
 file="/var/run/my_process.pid"
 if [ -z "$command" ]; then
     echo "Usage: manage_my_process {start|stop|restart}"
-    exit 1
+    exit
 fi
 # dashbord that manage the PID porcess using condition
 if [ "$command" == "start" ]; then
