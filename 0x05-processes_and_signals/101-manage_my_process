@@ -7,26 +7,29 @@ command="$1"
 file="/var/run/my_process.pid"
 if [ -z "$command" ]; then
     echo "Usage: $0 {start|stop|restart}"
-else
-    case $command in
-        start)
-            bash ./manage_my_process &
-            echo "$!" > $file
-            echo "manage_my_process started"
-            ;;
-        stop)
-            [ -e $file ] &&
-            pkill -f ./manage_my_process &&
-            rm $file
-            echo "manage_my_process stopped"
-            ;;
-        restart)
-            "$0" stop >& /dev/null
-            "$0" start >& /dev/null
-            echo "manage_my_process restarted"
-            ;;
-        *)
-            echo "Usage: $0 {start|stop|restart}"
-            ;;
-    esac
+    exit 1
 fi
+# dashbord that manage the PID porcess using cases
+case $command in
+    start)
+        ./manage_my_process &
+        echo "$!" > $file
+        echo "manage_my_process started"
+        ;;
+    stop)
+        if  [ -e "$file" ]; then
+          pkill -f ./manage_my_process &&
+          rm $file
+          echo "manage_my_process stopped"
+        fi
+        ;;
+    restart)
+        "$0" stop >& /dev/null
+        "$0" start >& /dev/null
+        echo "manage_my_process restarted"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
