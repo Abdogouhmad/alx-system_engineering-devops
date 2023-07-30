@@ -6,23 +6,23 @@
 command="$1"
 file="/var/run/my_process.pid"
 if [ -z "$command" ]; then
-    echo "Usage: $0 {start|stop|restart}"
+    echo "Usage: manage_my_process {start|stop|restart}"
     exit 1
 fi
-# dashbord that manage the PID porcess using cases
-if [ $command == "start" ]; then
+# dashbord that manage the PID porcess using condition
+if [ "$command" == "start" ]; then
     ./manage_my_process &
     echo "$!" > $file
     echo "manage_my_process started"
-elif [ $command == "stop" ]; then
+elif [ "$command" == "stop" ]; then
      [ -e $file ] &&
     pkill -f './manage_my_process' &&
     rm $file
     echo "manage_my_process stopped"
-elif [ $command == "restart" ]; then
+elif [ "$command" == "restart" ]; then
     "$0" stop >& /dev/null
     "$0" start >& /dev/null
     echo "manage_my_process restarted"
 else
-    echo "Usage: $0 {start|stop|restart}"
+    echo "Usage: manage_my_process {start|stop|restart}"
 fi
