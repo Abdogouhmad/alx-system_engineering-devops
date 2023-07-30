@@ -1,1 +1,8 @@
 #!/usr/bin/env bash
+# print I am alive every to sec
+file='/tmp/my_process'
+while true
+do
+  echo "I am alive!" >> $file
+  sleep 2
+done
