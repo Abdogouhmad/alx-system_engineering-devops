@@ -10,11 +10,12 @@ file="/var/run/myscript.pid"
 if [ ! -e "$file" ]; then
   touch "$file"
 fi
-sleep 2 &
 
+sleep 2 &
 echo "$!" > "$file"
-trap "echo 'I hate the kill command'; rm -f /var/run/myscript.pid; exit" SIGTERM
-trap "echo 'Y U no love me?!'" SIGINT
+
+trap 'echo "I hate the kill command"; rm -f /var/run/myscript.pid; exit' SIGTERM
+trap "echo Y U no love me?!" SIGINT
 while true
 do
   echo "To infinity and beyond"
