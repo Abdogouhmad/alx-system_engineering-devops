@@ -1,0 +1,68 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+%styling
+\linespread{1.5}
+\usepackage{hyphenat} %hyphens
+\usepackage{indentfirst} %indent 1st lines
+\usepackage{xcolor} %coloring text 
+\usepackage{hyperref} %linkes
+\usepackage{geometry}
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+\usepackage{fontspec}
+\usepackage[document]{ragged2e}
+\setmainfont{Arial}
+\usepackage{enumerate}
+\newcommand{\mdate}{July 2023}
+\renewcommand\contentsname{Summary:}
+\usepackage{float}
+\usepackage{lipsum} %dummy text generated
+\usepackage{natbib} %bibliography
+\usepackage{array} %table
+% EO styling
+
+\begin{document}
+\justifying
+    \begin{center}
+        ALX PROJECT \\
+        Web infrastructure Design 
+    \end{center}
+\section*{\underline{Task 0:}}
+    \large
+    \textbf{\underline{ Definitions and Explanations}}
+    \subsection*{What is a server:}
+        A server is a computer or system that provides resources, data, services,
+        or programs to other computers, known as \textbf{clients}, over a network. In theory, 
+        whenever computers share resources with client machines they are considered servers.
+    \subsection*{What is the role of the domain name:}
+        A domain name is user-friendly label that translates to numerical \textbf{IP}
+        enabling easy access to websites and online resources. it acts as bridge
+        between readable name and \textbf{IP addresses}.
+    \subsection*{What type of DNS record \textcolor{red}{\texttt{www}}  is in 
+                                \textcolor{red}{\texttt{ www.foobar.com}} :}
+        \textbf{it is a cname}
+    \subsection*{What is the role of the web server: }
+        The role is to store, process and display website content(\textbf{CodeBase}).
+        In addition, its role is to deliver web pages to users 
+        (\underline{HTML} and \underline{CSS})over the protocol
+        \underline{HTTP}.
+    \subsection*{What is the role of the application server: }
+        The role is to generate dynamic contents by executing server-side
+        code such as \underline{JSP, PHP} etc...
+    \subsection*{What is the role of the database: }
+        The role is to manage the data systematically and efficiently In
+        well-organized manner which allows data to be easily \textbf{accessed, readable 
+        updated and deleted}.
+    \subsection*{What is the server using to communicate with
+                    the computer of the user requesting the website: }
+        The server communicates through \textbf{\underline{HTTP}} protocol.
+
+\section{Issues}
+    \section*{SPOF (Single Point Of Failure)}
+        There are a lot of single points of failures starting from
+        having one server that contains only one web server. app server
+        and database. A \textbf{Single point of failure} is part of system which fails
+        when the entire system stop from working
+    \section*{Downtime when maintenance
+                needed (like deploying new code web server needs to be restarted)}
+    \section*{Cannot scale if too much incoming traffic}
+\end{document}
