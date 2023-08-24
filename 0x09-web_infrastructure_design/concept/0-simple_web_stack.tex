@@ -61,8 +61,14 @@
         There are a lot of single points of failures starting from
         having one server that contains only one web server. app server
         and database. A \textbf{Single point of failure} is part of system which fails
-        when the entire system stop from working
+        when the entire system stop from working.
     \section*{Downtime when maintenance
                 needed (like deploying new code web server needs to be restarted)}
+                When we need to run some maintenance checks on any component,
+                they have to be put down or the server has to be turned off.
+                Since there's only one server, the website would be experiencing a downtime.
     \section*{Cannot scale if too much incoming traffic}
+    It would be hard to scale this infrastructure
+    because one server contains the required components.
+    The server can quickly run out of resources or slow down when it starts receiving a lot of requests.
 \end{document}
