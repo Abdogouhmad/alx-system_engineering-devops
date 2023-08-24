@@ -1,0 +1,50 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+%styling
+\linespread{1.5}
+\usepackage{hyphenat} %hyphens
+\usepackage{indentfirst} %indent 1st lines
+\usepackage{xcolor} %coloring text 
+\usepackage{hyperref} %linkes
+\usepackage{geometry}
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+\usepackage{fontspec}
+\usepackage[document]{ragged2e}
+\setmainfont{Arial}
+\usepackage{enumerate}
+\newcommand{\mdate}{July 2023}
+\renewcommand\contentsname{Summary:}
+\usepackage{float}
+\usepackage{lipsum} %dummy text generated
+\usepackage{natbib} %bibliography
+\usepackage{array} %table
+% EO styling
+
+\begin{document}
+\justifying
+    \begin{center}
+        ALX PROJECT \\
+        Web infrastructure Design 
+    \end{center}
+\section*{\underline{Task 0:}}
+    \large
+    \textbf{\underline{ Definitions and Explanations}}
+    \subsection*{For every additional element, why you are adding it}
+    \subsection*{What distribution algorithm your load balancer is configured with and how it works}
+    \subsection*{Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both}
+    \subsection*{How a database Primary-Replica (Master-Slave) cluster works}
+    \subsection*{What is the difference between the Primary node and the Replica node in regard to the application}
+\section*{Issues: }
+    \subsection*{SPOF}
+        There are multiple SPOF (Single Point Of Failure).
+        For example, if the Primary MySQL database server is down, 
+        the entire site would be unable to make changes to the site (including adding or removing users).
+        The server containing the load balancer and the application server connecting to the primary database server are also SPOFs.
+    \subsection*{Security issues (no firewall, no HTTPS)}
+        The data transmitted over the network isn't encrypted using an SSL certificate so hackers 
+        can spy on the network. There is no way of blocking unauthorized IPs since there's no 
+        firewall installed on any server.
+    \subsection*{No monitoring}
+        We have no way of knowing the status of
+        each server since they're not being monitored.
+\end{document}
