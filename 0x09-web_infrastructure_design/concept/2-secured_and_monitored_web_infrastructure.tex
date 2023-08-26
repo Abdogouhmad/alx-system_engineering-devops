@@ -1,0 +1,70 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{graphicx} % Required for inserting images
+%styling
+\linespread{1.5}
+\usepackage[none]{hyphenat} %hyphens
+\usepackage{indentfirst} %indent 1st lines
+\usepackage{xcolor} %coloring text 
+\usepackage{hyperref} %linkes
+\usepackage{geometry}
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+\usepackage{fontspec}
+\usepackage[document]{ragged2e}
+\setmainfont{Arial}
+\usepackage{enumerate}
+\newcommand{\mdate}{July 2023}
+\renewcommand\contentsname{Summary:}
+\usepackage{float}
+\usepackage{lipsum} %dummy text generated
+\usepackage{natbib} %bibliography
+\usepackage{array} %table
+% EO styling
+
+\begin{document}
+\justifying
+    \begin{center}
+        ALX PROJECT \\
+        Web infrastructure Design 
+    \end{center}
+\section*{\underline{Task 2:}}
+    \textbf{\underline{Definitions and Explanations:}}
+    \subsection*{For every additional element, why you are adding it}
+        we added three new components to the infrastructure:
+        a firewall for each server to protect them from any outcaste attack, 1 \textbf{SSL} certificate to 
+        secure the connection between the client and the server, and three monitoring tools to monitor the servers and
+        to collect logs and send to our data collector server. In addition, load balancer to distribute the traffic between the servers.
+    \subsection*{What are firewalls for: }
+        A firewall is a network security device that monitors incoming and outgoing network traffic and decides whether to allow or block specific traffic based on a defined set of security rules.
+        Firewalls have been a first line of defense in network security for over 25 years. They establish a barrier between secured and controlled internal networks that can be trusted and untrusted outside networks, such as the Internet.
+        A firewall can be hardware, software, or both.
+    \subsection*{Why is the traffic served over HTTPS: }
+        Because previously the traffic was served over HTTP, which is not secure,
+        and we need to secure the traffic between the client and the server.
+    \subsection*{What monitoring is used for: }
+        Monitoring is the process of gathering metrics to determine the health and status of the 
+        environment. Monitoring tools are used to detect problems in the infrastructure and 
+        applications as soon as possible. Monitoring tools are also used to measure the performance 
+        of the infrastructure and applications.
+    \subsection*{How the monitoring tool is collecting data: }
+        The monitoring tool is collecting data by sending requests to the servers and collecting the 
+        response time, and the status code of the response. The monitoring tool is also collecting 
+        logs from the servers and sending them to the data collector server.
+    \subsection*{Explain what to do if you want to monitor your web server QPS: }
+        To monitor the web server QPS, we need to use a monitoring tool that can send requests to the 
+        server and collect the response time and the status code of the response. We can also use a 
+        monitoring tool that can collect logs from the server and send them to the data collector 
+        server. We can also use a monitoring tool that can collect metrics from the server and send 
+        them to the data collector server.
+\section*{Issues: }
+    \subsection*{Why terminating SSL at the load balancer level is an issue: }
+        it is an issue because decrypting the traffic at the load balancer level will increase the
+        load on the load balancer, and it will also increase the latency of the requests. It will also
+        increase the load on the servers because the servers will have to decrypt the traffic.
+    \subsection*{Why having only one MySQL server capable of accepting writes is an issue: }
+        because once it is down it means do data can be added or updated meaning some
+        features of the application won’t work
+    \subsection*{Why having servers with all the same components (database, web server and
+    application server) might be a problem: }
+    this is because once you have a bug in one of
+    the components in one of the servers then the bug will be valid in the other servers.
+\end{document}

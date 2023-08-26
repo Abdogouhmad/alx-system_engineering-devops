@@ -5,7 +5,7 @@ MAGENTA=\033[0;35m
 NC=\033[0m # No Color
 
 #program
-program= 1-distributed_web_infrastructure.tex
+program= 2-secured_and_monitored_web_infrastructure.tex
 
 # Compiler
 CC= xelatex

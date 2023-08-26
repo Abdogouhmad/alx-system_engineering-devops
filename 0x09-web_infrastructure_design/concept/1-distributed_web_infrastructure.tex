@@ -2,7 +2,7 @@
 \usepackage{graphicx} % Required for inserting images
 %styling
 \linespread{1.5}
-\usepackage{hyphenat} %hyphens
+\usepackage[none]{hyphenat} %hyphens
 \usepackage{indentfirst} %indent 1st lines
 \usepackage{xcolor} %coloring text 
 \usepackage{hyperref} %linkes
@@ -26,14 +26,34 @@
         ALX PROJECT \\
         Web infrastructure Design 
     \end{center}
-\section*{\underline{Task 0:}}
+\section*{\underline{Task 1:}}
     \large
     \textbf{\underline{ Definitions and Explanations}}
     \subsection*{For every additional element, why you are adding it}
+        We added a load balancer to distribute the workload across multiple servers. 
+        This allows us to scale horizontally by adding more servers to the pool and 
+        distribute the load among them. 
+        It also ensures no single server is overwhelmed by requests and 
+        prevents any single point of failure, improving reliability.
     \subsection*{What distribution algorithm your load balancer is configured with and how it works}
+        Our load balancer utilizes the Round Robin algorithm, which connects in a sequential order unless a server becomes inaccessible.
+        Requests are serviced sequentially, moving from one server to the next. Once all servers have received requests,
+        the cycle recommences from the initial server.
+        This approach is particularly effective when servers share equal specifications and there's minimal reliance on persistent connections.
     \subsection*{Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both}
+        Our load balancer is enabling an Active-Active setup. 
+        In an Active-Active setup, all servers are active and capable of handling requests. 
+        In contrast, in an Active-Passive setup, only one server is active and capable of handling 
+        requests while the other servers are passive and only become active when the active server fails.
     \subsection*{How a database Primary-Replica (Master-Slave) cluster works}
+        A Primary-Replica configures one server to act as the Primary server and the other server to act as a Replica of the Primary server. 
+        However, the Primary server is capable of performing read or write requests while the Replica server is only capable of performing read requests.
+        Data is synchronized between the Primary and Replica servers whenever the Primary server executes a write operation.
     \subsection*{What is the difference between the Primary node and the Replica node in regard to the application}
+        In an application's distributed system, the primary node serves as the central source of truth, 
+        managing write operations for data updates and maintaining consistency. It ensures data durability and handles failover situations. 
+        In contrast, replica nodes store copies of data from the primary node, 
+        allowing them to handle read operations efficiently, enhance availability, and contribute to overall system resilience by providing redundancy.
 \section*{Issues: }
     \subsection*{SPOF}
         There are multiple SPOF (Single Point Of Failure).
