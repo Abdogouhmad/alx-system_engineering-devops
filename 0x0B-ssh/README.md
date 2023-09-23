@@ -30,3 +30,4 @@
 | 2. Client configuration file | [2-ssh_config](./2-ssh_config) |
 | 3. Let me in! | [SOON](./) |
 | 4. Client configuration file (w/ Puppet) | [100-puppet_ssh_config.pp](./100-puppet_ssh_config.pp) |
+
