@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# script that cpy file from client to server using scp 
+# colors
+RED='\e[31m'
+NC='\e[0m'
+# work of the scriupt 
+FILE_PATH="$1"
+IP="$2"
+USERNAME="$3"
+KEY_PATH="$4"
+if [ "$#" -eq 4 ]
+  then
+    scp -i "$KEY_PATH" -o StrictHostKeyChecking=no  "$4"/"$FILE_PATH" "$USERNAME"@"$IP":~/
+  else
+    echo -e "${RED}Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY${NC}"
+    exit 1
+fi
