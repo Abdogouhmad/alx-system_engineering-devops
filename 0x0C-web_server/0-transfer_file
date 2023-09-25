@@ -10,7 +10,7 @@ USERNAME="$3"
 KEY_PATH="$4"
 if [ "$#" -eq 4 ]
   then
-    scp -i "$KEY_PATH" -o StrictHostKeyChecking=no  "$4"/"$FILE_PATH" "$USERNAME"@"$IP":~/
+    scp -i "$KEY_PATH" -o StrictHostKeyChecking=no "$FILE_PATH" "$USERNAME"@"$IP":~/
   else
     echo -e "${RED}Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY${NC}"
     exit 1
