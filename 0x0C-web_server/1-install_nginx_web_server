@@ -9,7 +9,6 @@ NC='\e[0m'
 #updating and installing the nigx
 echo -e "${YELLOW}[!] updating your system and installing the nginx${NC}"
 sudo apt-get update -y
-sudo apt-get upgrade -y
 sudo apt-get install nginx -y
 echo -e "${GREEN}[+] nginx installed${NC}"
 
