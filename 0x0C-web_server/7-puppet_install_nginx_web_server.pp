@@ -1,7 +1,7 @@
-# update ubuntu packages
+# Setup New Ubuntu server with nginx
 
 exec { 'update system':
-	command => '/usr/bin/apt-get -y update',
+        command => '/usr/bin/apt-get update',
 }
 
 package { 'nginx':
@@ -9,8 +9,8 @@ package { 'nginx':
 	require => Exec['update system']
 }
 
-file {'var/www/html/index.nginx-debian.html':
-	content => 'Hello World!',
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
 }
 
 exec {'redirect_me':
@@ -18,7 +18,7 @@ exec {'redirect_me':
 	provider => 'shell'
 }
 
-service { 'nginx':
+service {'nginx':
 	ensure => running,
-	require => package['nginx']
+	require => Package['nginx']
 }
