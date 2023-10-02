@@ -13,7 +13,8 @@ cprint() {
 }
 cprint "$orange" "[+] Good Morning, I am about to do some updates and minor checks"
 checker() {
-  if  command -v "$1" >/dev/null 2>&1 ; then
+  command -v "$1" >/dev/null 2>&1
+  if [ $? -eq 0 ]; then
     cprint "$green" "[+] $1 is installed"
     cprint "$yellow" "[!] Updating packages that you have"
     sudo apt-get update -y  && \
