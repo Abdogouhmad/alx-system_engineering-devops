@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
 
+# shellcheck disable=SC2181
 # colors
 green='\033[0;34m'
 orange='\033[0;33m'
 red='\033[0;31m'
 yellow='\033[1;33m'
-
 cprint() {
   local color=$1
   local text=$2
   local NC='\033[0m'
   echo -e "${color}${text}${NC}"
 }
-
 cprint "$orange" "[+] Good Morning, I am about to do some updates and minor checks"
-
 checker() {
   command -v "$1" >/dev/null 2>&1
   if [ $? -eq 0 ]; then
@@ -33,16 +31,11 @@ checker() {
     cprint "$green" "[+] $1 is now installed"
   fi
 }
-
 checker nginx # checking if the nginx is installed if not then install
-
 cprint "$green" "[+] Stepping some minor stuff befor running nginx"
-
 # allowig nginx to run on port 80
 sudo ufw allow 'Nginx HTTP'
-
 # give the user ownership to website files for easy editing
-
 if [ -d "/var/www" ] ; then
   sudo chown -R "$USER":"$USER" /var/www
   sudo chmod -R 755 /var/www
@@ -51,28 +44,21 @@ else
   sudo chown -R "$USER":"$USER" /var/www
   sudo chmod -R 755 /var/www
 fi
-
 # create dir if not presented
 declare -a folders=("html" "error")
-
 for folder in "${folders[@]}"; do
   if [ ! -d "/var/www/$folder" ]; then
     mkdir "/var/www/$folder"
   fi
 done
-
-
 # create new index.html
 echo "Hello World!" > /var/www/html/index.html
 # create new 404.html
 echo "Ceci n'est pas une page" > /var/www/error/404.html
-
 # configer the server but backup 1st 
 # config file
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
-
 # config files
-
 alx_server_config=\
 "server {
 		listen 80 default_server;
@@ -92,7 +78,6 @@ alx_server_config=\
 			internal;
 		}
 }"
-
 sudo echo "$alx_server_config" | sudo dd status=none of=/etc/nginx/sites-available/default
 # check of nginx is running if not the start if it is already running then restart
 if [ "$(pgrep -c nginx)" -eq 0 ]; then
@@ -100,7 +85,4 @@ if [ "$(pgrep -c nginx)" -eq 0 ]; then
 else
   sudo service nginx restart
 fi
-
-
-
 cprint "$green" "[+] Done Bye Bye"
