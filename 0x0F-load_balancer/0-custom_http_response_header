@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
-# shellcheck disable=SC2181
 # colors
 green='\033[0;34m'
 orange='\033[0;33m'
@@ -17,8 +16,7 @@ cprint() {
 cprint "$orange" "[+] Good Morning, I am about to do some updates and minor checks"
 
 checker() {
-  command -v "$1" >/dev/null 2>&1
-  if [ $? -eq 0 ]; then
+  if  command -v "$1" > /dev/null 2>&1 ; then
     cprint "$green" "[+] $1 is installed"
     cprint "$yellow" "[!] Updating packages that you have"
     sudo apt-get update -y  && \
