@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2154
-
-# shellcheck disable=SC2181
 # colors
 green='\033[0;34m'
 orange='\033[0;33m'
@@ -21,9 +19,13 @@ checker() {
     cprint "$yellow" "[!] Updating packages that you have"
     sudo apt-get update -y  && \
       sudo apt-get upgrade -y 
+    sudo apt-get update -y  && \
+      sudo apt-get upgrade -y 
   else
     cprint "$red" "[+] $1 is not installed"
     cprint "$yellow" "[!] Installing $1"
+    sudo apt-get update -y  && \
+      sudo apt-get install "$1" -y  
     sudo apt-get update -y  && \
       sudo apt-get upgrade -y  && \
       sudo apt-get install "$1" -y
