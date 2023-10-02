@@ -1,2 +1,77 @@
 #!/usr/bin/env bash
+# colors
+green='\033[0;34m'
+red='\033[0;31m'
+yellow='\033[1;33m'
+cprint() {
+  local color=$1
+  local text=$2
+  local NC='\033[0m'
+  echo -e "${color}${text}${NC}"
+}
 
+#  updating
+
+cprint "$green" "[+] Good morning I would like to update your system and install haproxy"
+
+checker() {
+  if  command -v "$1" >/dev/null 2>&1 ; then
+    cprint "$green" "[+] $1 is installed"
+    cprint "$yellow" "[!] Updating packages that you have"
+    sudo apt-get update -y  && \
+      sudo apt-get upgrade -y 
+    sudo apt-get update -y  && \
+      sudo apt-get upgrade -y 
+  else
+    cprint "$red" "[+] $1 is not installed"
+    cprint "$yellow" "[!] Installing $1"
+    sudo apt-get update -y  && \
+      sudo apt-get install "$1" -y  
+    sudo apt-get update -y  && \
+      sudo apt-get upgrade -y  && \
+      sudo apt-get install "$1" -y
+    echo -e "\n"
+    cprint "$green" "[+] $1 is now installed"
+  fi
+}
+
+checker haproxy # check if haproxy is installed
+
+
+cprint "$yellow" "[!] setting some minor stuff"
+
+#backing default haproxy
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
+
+# setting new config
+server_config=\
+"
+defaults
+    mode http
+    timeout client 15s
+    timeout connect 10s
+    timeout server 15s
+
+frontend th3gr00t-tech-frontend
+    bind *:80
+    default_backend th3gr00t-tech-backend
+
+backend th3gr00t-tech-backend
+    balance roundrobin
+    server 369995-web-01 54.90.63.243:80 check
+    server 369995-web-54.90.4.180:80 check
+"
+# shellcheck disable=SC2154
+echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+
+# enable haproxy
+echo "ENABLED=1" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+
+if [ "$(pgrep haproxy)" ]; then
+  cprint "$green" "[+] haproxy is running"
+
+  sudo service haproxy start
+else
+  cprint "$red" "[+] restart haproxy "
+  sudo service haproxy restart
+fi
