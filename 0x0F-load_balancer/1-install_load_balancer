@@ -59,7 +59,7 @@ backend alx_backend
 "
 # shellcheck disable=SC2154
 
-echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
 # enable haproxy
 #echo "" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
