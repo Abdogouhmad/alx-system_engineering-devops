@@ -46,14 +46,9 @@ sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 # setting new config
 server_config=\
 "
-defaults
-    mode http
-    timeout client 15s
-    timeout connect 10s
-    timeout server 15s
-    timeout http-request 10s
+ENABLED=1
 
-frontend alx_frontend
+frontend my_frontend
     bind *:80
     default_backend alx_backend
 
@@ -63,16 +58,9 @@ backend alx_backend
     server 369995-web-02 54.90.4.180:80 check
 "
 # shellcheck disable=SC2154
+
 echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
 
 # enable haproxy
-echo "ENABLED=1" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
-
-if [ "$(pgrep haproxy)" ]; then
-  cprint "$green" "[+] haproxy is running"
-
-  sudo service haproxy start
-else
-  cprint "$red" "[+] restart haproxy "
-  sudo service haproxy restart
-fi
+#echo "" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+sudo service haproxy restart
