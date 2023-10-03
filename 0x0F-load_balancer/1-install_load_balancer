@@ -46,8 +46,6 @@ sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 # setting new config
 server_config=\
 "
-ENABLED=1
-
 frontend my_frontend
     bind *:80
     default_backend alx_backend
