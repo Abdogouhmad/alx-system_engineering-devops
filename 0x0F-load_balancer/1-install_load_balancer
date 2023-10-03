@@ -51,6 +51,7 @@ defaults
     timeout client 15s
     timeout connect 10s
     timeout server 15s
+    timeout http-request 10s
 
 frontend th3gr00t-tech-frontend
     bind *:80
@@ -59,7 +60,7 @@ frontend th3gr00t-tech-frontend
 backend th3gr00t-tech-backend
     balance roundrobin
     server 369995-web-01 54.90.63.243:80 check
-    server 369995-web-54.90.4.180:80 check
+    server 369995-web-02 54.90.4.180:80 check
 "
 # shellcheck disable=SC2154
 echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
