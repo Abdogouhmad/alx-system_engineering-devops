@@ -55,7 +55,7 @@ defaults
 
 frontend alx_frontend
     bind *:80
-    default_backend alx_frontend
+    default_backend alx_backend
 
 backend alx_backend
     balance roundrobin
