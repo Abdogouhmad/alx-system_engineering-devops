@@ -53,11 +53,11 @@ defaults
     timeout server 15s
     timeout http-request 10s
 
-frontend th3gr00t-tech-frontend
+frontend alx_frontend
     bind *:80
-    default_backend th3gr00t-tech-backend
+    default_backend alx_frontend
 
-backend th3gr00t-tech-backend
+backend alx_backend
     balance roundrobin
     server 369995-web-01 54.90.63.243:80 check
     server 369995-web-02 54.90.4.180:80 check
