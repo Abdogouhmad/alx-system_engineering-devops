@@ -5,31 +5,24 @@
 #make our life easier, and write a Bash script that will display information about subdomains.
 
 # coloring
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-YELLOW='\033[1;33m'
-# variables and paramaters 
-subdomains=("www" "lb-01" "web-01" "web-02")
-domain="$1"
-sub="$2"
+# RED='\033[0;31m'
+# GREEN='\033[0;32m'
+# NC='\033[0m'
+# YELLOW='\033[1;33m'
 
-# logic using dig and awk tool
 
-dig_cmd () {
-	# func variables
-	sub="$2"
-	INFO="$(dig "$sub.$domain" | grep -A1 'ANSWER SECTION:' | awk 'NR==2')"
-	IP=$(echo "$INFO" | awk '{print $5}')
-	RECORD=$(echo "$INFO" | awk '{print $4}')
-
-	echo -e "${YELLOW}The subdomain ${RED}$sub${YELLOW} is a ${GREEN}$RECORD${YELLOW} record and points to ${GREEN}$IP${NC}"
+domain_information () {
+    line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+    echo "$2 $line" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
 }
 
-if [ $# -eq 1 ]; then
-	for subs in "${subdomains[@]}"; do
-		dig_cmd "$domain" "$subs"
-	done
-elif [ $# -eq 2 ]; then
-	dig_cmd "$domain" "$sub"
+if [ "$#" == 1 ]
+then
+  domain_information "$1" "www"
+  domain_information "$1" "lb-01"
+  domain_information "$1" "web-01"
+  domain_information "$1" "web-02"
+elif [ "$#" == 2 ]
+then
+  domain_information "$1" "$2"
 fi
