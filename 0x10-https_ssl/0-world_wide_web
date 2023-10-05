@@ -17,7 +17,6 @@ sub="$2"
 # logic using dig and awk tool
 
 get_info () {
-    sub="$2"
     INFO="$(dig "$sub.$domain" | grep -A 1 'ANSWER SECTION:' | awk 'NR == 2')"
     IP="$(echo "$INFO" | awk '{print $5}')"
     RECO="$(echo "$INFO" | awk '{print $4}')"
