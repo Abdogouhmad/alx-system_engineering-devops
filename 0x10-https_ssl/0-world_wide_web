@@ -17,12 +17,12 @@ sub="$2"
 # logic using dig and awk tool
 
 get_info () {
-    #sub="$2"
+    sub="$2"
     INFO="$(dig "$sub.$domain" | grep -A 1 'ANSWER SECTION:' | awk 'NR == 2')"
     IP="$(echo "$INFO" | awk '{print $5}')"
     RECO="$(echo "$INFO" | awk '{print $4}')"
 
-    echo -e "${NC}The subdomain ${RED} $sub ${NC} is a ${GREEN} $RECO ${NC} record and points to ${YELLOW} $IP ${NC}"
+    echo -e "${NC}The subdomain ${RED}$sub${NC} is a ${GREEN}$RECO${NC} record and points to ${YELLOW}$IP${NC}"
 }
 
 if [ $# -eq 1 ]; then
