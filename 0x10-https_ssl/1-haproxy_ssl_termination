@@ -11,7 +11,7 @@ defaults
 
 frontend my_frontend
     bind *:80
-    bind *:443 ssl crt /etc/letsencrypt/live/www.ag-dev.tech/fullchain.pem 
+    bind *:443 ssl crt /etc/letsencrypt/archive/www.ag-dev.tech/fullchain.pem 
     http-request redirect scheme https unless { ssl_fc }
     http-request set-header X-Forwarded-Proto https
     default_backend alx-backend
