@@ -16,18 +16,20 @@ sub="$2"
 
 # logic using dig and awk tool
 
-get_info () {
-    INFO="$(dig "$sub.$domain" | grep -A 1 'ANSWER SECTION:' | awk 'NR == 2')"
-    IP="$(echo "$INFO" | awk '{print $5}')"
-    RECO="$(echo "$INFO" | awk '{print $4}')"
+dig_cmd () {
+	# func variables
+	sub="$2"
+	INFO="$(dig "$sub.$domain" | grep -A1 'ANSWER SECTION:' | awk 'NR==2')"
+	IP=$(echo "$INFO" | awk '{print $5}')
+	RECORD=$(echo "$INFO" | awk '{print $4}')
 
-    echo -e "${NC}The subdomain ${RED}$sub${NC} is a ${GREEN}$RECO${NC} record and points to ${YELLOW}$IP${NC}"
+	echo -e "${YELLOW}The subdomain ${RED}$sub${YELLOW} is a ${GREEN}$RECORD${YELLOW} record and points to ${GREEN}$IP${NC}"
 }
 
 if [ $# -eq 1 ]; then
-    for sub in "${subdomains[@]}"; do
-        get_info "$sub" "$sub"
-    done
+	for subs in "${subdomains[@]}"; do
+		dig_cmd "$domain" "$subs"
+	done
 elif [ $# -eq 2 ]; then
-    get_info "$sub" "$domain"
-fi 
+	dig_cmd "$domain" "$sub"
+fi
