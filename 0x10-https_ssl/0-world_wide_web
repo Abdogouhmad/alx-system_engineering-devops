@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+#Configure your domain zone so that the subdomain 
+#www points to your load-balancer IP (lb-01). Let’s also add other subdomains to 
+#make our life easier, and write a Bash script that will display information about subdomains.
+
+# coloring
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+YELLOW='\033[1;33m'
+# variables and paramaters 
+subdomains=("www" "lb-01" "web-01" "web-02")
+domain="$1"
+sub="$2"
+
+# logic using dig and awk tool
+
+get_info () {
+    #sub="$2"
+    INFO="$(dig "$sub.$domain" | grep -A 1 'ANSWER SECTION:' | awk 'NR == 2')"
+    IP="$(echo "$INFO" | awk '{print $5}')"
+    RECO="$(echo "$INFO" | awk '{print $4}')"
+
+    echo -e "${NC}The subdomain ${RED} $sub ${NC} is a ${GREEN} $RECO ${NC} record and points to ${YELLOW} $IP ${NC}"
+}
+
+if [ $# -eq 1 ]; then
+    for sub in "${subdomains[@]}"; do
+        get_info "$sub" "$sub"
+    done
+elif [ $# -eq 2 ]; then
+    get_info "$sub" "$domain"
+fi 
