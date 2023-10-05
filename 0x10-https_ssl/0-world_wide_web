@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-
 #Configure your domain zone so that the subdomain 
-#www points to your load-balancer IP (lb-01). Let’s also add other subdomains to 
-#make our life easier, and write a Bash script that will display information about subdomains.
-
-# coloring
-# RED='\033[0;31m'
-# GREEN='\033[0;32m'
-# NC='\033[0m'
-# YELLOW='\033[1;33m'
-
 
 domain_information () {
     line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
