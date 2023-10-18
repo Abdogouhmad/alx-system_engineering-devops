@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# runs who ami under the user passed as an argu 
+su "$1" -s /bin/bash -c "whoami"
